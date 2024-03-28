@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<div id="messages"></div>
+<input type="text" id="messageInput" />
+<button onclick="sendMessage()">Send Message</button>
+
+<script>
+    const messagesDiv = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const ws = new WebSocket('ws://localhost:3001');
+
+    ws.onmessage = function(event) {
+        const message = event.data;
+        messagesDiv.innerHTML += '<p>Message from server: ' + message + '</p>';
+    };
+
+    function sendMessage() {
+        const message = JSON.stringify({ text: messageInput.value });
+        ws.send(message);
+        messageInput.value = '';
+    }
+
+
+</script>
+</body>
+</html>

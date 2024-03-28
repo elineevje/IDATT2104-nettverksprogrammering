@@ -1,0 +1,28 @@
+version: '3.6'
+services:
+  backend:
+    build:
+      context: ./backend
+      target:  finalApp
+    image: a5/compiler-backend
+    container_name: compiler-backend
+    ports:
+      - 8090:8090
+    networks:
+      - frontback
+
+  frontend:
+    build: ./frontend
+    image: a5/compiler-frontend
+    container_name: compiler-frontend
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    networks:
+      - frontback
+
+
+networks:
+  frontback:
+    driver: bridge
