@@ -1,1 +1,1 @@
-# idatt2104
+# IDATT2104 Nettverksprogrammering
